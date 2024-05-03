@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Interfaces\Dashboard\BrandSericeInterface;
+use App\Http\Requests\Dashboard\BrandRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Monarobase\CountryList\CountryListFacade;
@@ -37,13 +38,16 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        $created=$this->brandService->brandStore($request);
-        if($created){
-            return redirect()->route('dashboard.brands.index')->with('success','Brand Created Successfully');
-        }else{
-            return redirect()->route('dashboard.brands.index')->with('fail','Something Went Wrong,Please Try Again');
+        try{
+            $this->brandService->brandStore($request);
+            return redirect()->route('dashboard.brands.index')
+                ->with('success','Brand Created Successfully');
+        }catch(\Exception $e){
+            return redirect()->route('dashboard.brands.index')
+                ->with('fail','Something Went Wrong,Please Try Again');
+            throw $e;
         }
     }
 
@@ -62,13 +66,13 @@ class BrandController extends Controller
     {
         $countries = CountryListFacade::getList();
         $brand=Brand::findOrFail($id);
-        return view('dashboard.brand.edit',compact('brand','countries'));
+        return view('dashboard.brand.edit',compact(['brand','countries']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BrandRequest $request, string $id)
     {
         try{
             $this->brandService->brandUpdate($request, $id);
