@@ -27,6 +27,13 @@
                    <li><a href="{{ route('dashboard.users.index') }}"><i class="las la-th-list"></i>User List</a></li>
                 </ul>
              </li>
+             <li>
+                <a href="#forms" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-car iq-arrow-left"></i><span>Car</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="forms" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                   <li><a href="{{ route('dashboard.brands.index') }}"><i class="las la-certificate"></i>Brand</a></li>
+                   <li><a href="form-validation.html"><i class="las la-flag"></i>Model</a></li>
+                </ul>
+             </li>
              {{--
              <li>
                 <a href="#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
