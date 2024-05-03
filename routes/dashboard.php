@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\Auth\LogoutController;
 use App\Http\Controllers\Dashboard\Auth\RegisterController;
+use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +25,11 @@ Route::group([
     Route::post('users/change-status/{id}',[UserController::class,'change_user_status'])->name('users.changeStatus');
     Route::resource('/users',UserController::class);
 
-    //routes for admin and vendors
+    //routes for admins and vendors
     Route::post('admins/change-status/{id}',[AdminController::class,'change_admin_status'])->name('admins.changeStatus');
     Route::resource('/admins',AdminController::class);
+
+    //route for brands
+    Route::resource('/brands',BrandController::class);
 }
 );
