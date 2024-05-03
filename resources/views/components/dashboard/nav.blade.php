@@ -28,10 +28,17 @@
                 </ul>
              </li>
              <li>
-                <a href="#forms" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-car iq-arrow-left"></i><span>Car</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                <ul id="forms" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                <a href="#car" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-car iq-arrow-left"></i><span>Car</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="car" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                    <li><a href="{{ route('dashboard.brands.index') }}"><i class="las la-certificate"></i>Brand</a></li>
-                   <li><a href="form-validation.html"><i class="las la-flag"></i>Model</a></li>
+                   <li><a href="{{ route('dashboard.models.index') }}"><i class="las la-flag"></i>Model</a></li>
+                </ul>
+             </li>
+             <li>
+                <a href="#social" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-hashtag iq-arrow-left"></i><span>Social Media</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="social" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                   <li><a href="{{ route('dashboard.posts.index') }}"><i class="las la-share"></i>Post</a></li>
+                   <li><a href="{{ route('dashboard.comments.index') }}"><i class="las la-comments"></i>Comment</a></li>
                 </ul>
              </li>
              {{--

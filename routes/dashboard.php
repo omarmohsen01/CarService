@@ -5,7 +5,10 @@ use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\Auth\LogoutController;
 use App\Http\Controllers\Dashboard\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\Dashboard\CommentController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ModelController;
+use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +34,14 @@ Route::group([
 
     //route for brands
     Route::resource('/brands',BrandController::class);
+
+    //route for model
+    Route::resource('/models',ModelController::class);
+
+    //route for posts
+    Route::resource('/posts',PostController::class);
+
+    //route for comments
+    Route::resource('/comments',CommentController::class);
 }
 );

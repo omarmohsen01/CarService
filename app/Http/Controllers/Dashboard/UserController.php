@@ -43,6 +43,15 @@ class UserController extends Controller
         }else{
             return redirect()->route('dashboard.users.index')->with('fail','Something Went Wrong,Please Try Again');
         }
+        try{
+            $this->userService->userStore($request);
+            return redirect()->route('dashboard.users.index')
+                ->with('success','User Created Successfully');
+        }catch(\Exception $e){
+            return redirect()->route('dashboard.users.index')
+                ->with('fail','Something Went Wrong,Please Try Again');
+            throw $e;
+        }
     }
 
     /**

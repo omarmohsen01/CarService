@@ -6,33 +6,33 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ModelCar extends Model
+class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['code','manufacturing_year','brand_id','image'] ;
-    protected $table='models';
+    protected $fillable = ['content','brand_id','user_id'] ;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function brand()
     {
         return $this->belongsTo(Brand::class);
     }
+
     public function scopeFilter(Builder $builder, $filter)
     {
         $defaultOptions = [
-            'code' => null,
             'brand_id'=> null,
-            'manufacturing_year' => null,
+            'user_id' => null,
         ];
         $options = array_merge($defaultOptions, $filter);
 
-        $builder->when($options['code'], function ($query, $code) {
-            return $query->where('code', $code);
-        });
         $builder->when($options['brand_id'], function ($query, $brand_id) {
             return $query->where('brand_id', $brand_id);
         });
-        $builder->when($options['manufacturing_year'], function ($query, $manufacturing_year) {
-            return $query->where('manufacturing_year', $manufacturing_year);
+        $builder->when($options['user_id'], function ($query, $user_id) {
+            return $query->where('user_id', $user_id);
         });
     }
 }

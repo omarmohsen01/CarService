@@ -43,6 +43,15 @@ class AdminController extends Controller
         }else{
             return redirect()->route('dashboard.admins.index')->with('fail','Something Went Wrong,Please Try Again');
         }
+        try{
+            $this->adminService->adminStore($request);
+            return redirect()->route('dashboard.admins.index')
+                ->with('success','Admin Or Vendor Created Successfully');
+        }catch(\Exception $e){
+            return redirect()->route('dashboard.admins.index')
+                ->with('fail','Something Went Wrong,Please Try Again');
+            throw $e;
+        }
     }
 
     /**

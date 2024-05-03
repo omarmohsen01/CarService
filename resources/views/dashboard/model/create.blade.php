@@ -7,11 +7,11 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title">Add Brand Image</h4>
+                                <h4 class="card-title">Add Model Image</h4>
                             </div>
                         </div>
                         <div class="iq-card-body">
-                            <form method="POST" action="{{ route('dashboard.brands.store') }}"
+                            <form method="POST" action="{{ route('dashboard.models.store') }}"
                                 enctype="multipart/form-data">
                                 @csrf
 
@@ -41,7 +41,7 @@
                     <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                             <div class="iq-header-title">
-                                <h4 class="card-title"> Brand Information</h4>
+                                <h4 class="card-title"> Model Information</h4>
                             </div>
                         </div>
                         @if ($errors->any())
@@ -55,21 +55,29 @@
                         @endif
                         <div class="iq-card-body">
                             <div class="form-group col-md-6">
-                                <label for="fname">Brand Name:</label>
-                                <input type="text" class="form-control" name="name" id="fname"
-                                    placeholder="Brand Name">
+                                <label for="fname">Model Code:</label>
+                                <input type="text" class="form-control" name="code" id="fname"
+                                    placeholder="Model Name">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="fname">Country Of Manufacture:</label>
-                                <select class="custom-select" name="country_of_manufacture" id="country"
-                                    placeholder="Country Of Manufacture">
-                                    <option value="">Select Country</option>
-                                    @foreach ($countries as $country)
-                                        <option value="{{ $country }}">{{ $country }}</option>
+                                <label for="fname">Brand:</label>
+                                <select class="custom-select" name="brand_id" id="year" placeholder="Select Brand">
+                                    <option value="">Select Brand</option>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add New Brand</button>
+                            <div class="form-group col-md-6">
+                                <label for="fname">Manufacturing Year:</label>
+                                <select class="custom-select" name="manufacturing_year" id="year" placeholder="Select Year">
+                                    <option value="">Select Year</option>
+                                    @for ($year = date('Y'); $year >= 1950; $year--)
+                                        <option value="{{ $year }}">{{ $year }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add New Model</button>
                             </form>
                         </div>
                     </div>
