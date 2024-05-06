@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ModelController;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\VendorSparePartController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,5 +44,8 @@ Route::group([
 
     //route for comments
     Route::resource('/comments',CommentController::class);
+
+    //route for spare part venor
+    Route::resource('/vendor-spare-parts',VendorSparePartController::class);
 }
 );
