@@ -20,8 +20,11 @@ return new class extends Migration
             $table->integer('quantity')->nullable();
             $table->date('production_date')->nullable();
             $table->date('expiration_date')->nullable();
+            $table->json('images')->nullable();
+            $table->json('videos')->nullable();
             $table->foreignId('admin_id')->constrained('admins')->cascadeOnDelete();
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
+            $table->integer('sold_out')->nullable();
             $table->timestamps();
         });
     }

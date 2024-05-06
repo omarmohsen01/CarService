@@ -41,6 +41,12 @@
                    <li><a href="{{ route('dashboard.comments.index') }}"><i class="las la-comments"></i>Comment</a></li>
                 </ul>
              </li>
+             <li>
+                <a href="#spare" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tools iq-arrow-left"></i><span>Spare Part</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="spare" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                   <li><a href="{{ route('dashboard.vendor-spare-parts.index') }}"><i class="las la-wrench"></i>Spare Part</a></li>
+                </ul>
+             </li>
              {{--
              <li>
                 <a href="#ui-elements" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
