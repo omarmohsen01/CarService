@@ -1,5 +1,12 @@
 @extends('layouts.dashboard')
 @section('content')
+<style>
+    .carousel-item img {
+        width: 100%;
+        height: 300px; 
+        object-fit: cover;
+    }
+</style>
 <div id="content-page" class="content-page">
     <div class="container-fluid">
        <div class="row">
@@ -69,13 +76,112 @@
                                         {{-- Display placeholder if no images --}}
                                         <td class="text-center"></td>
                                     @endif
+                                    <td>
+                                        <div class="iq-card-body">
+                                            <button type="button" class="btn btn-link mb-3" data-toggle="modal" data-target="#exampleModalCenteredScrollable_{{ $spare_part->id }}">
+                                                <b>{{ $spare_part->name }}</b>
+                                            </button>
+                                            <div id="exampleModalCenteredScrollable_{{ $spare_part->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">{{ $spare_part->name }}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="iq-card">
+                                                                <div class="iq-card-header d-flex justify-content-between">
+                                                                    <div class="iq-header-title">
+                                                                        <h4 class="card-title">{{ $spare_part->name }}</h4>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="iq-card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-3">
+                                                                            <div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                                                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home_{{ $spare_part->id }}" role="tab" aria-controls="v-pills-home" aria-selected="true">Details</a>
+                                                                                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile_{{ $spare_part->id }}" role="tab" aria-controls="v-pills-profile" aria-selected="false">Description</a>
+                                                                                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages_{{ $spare_part->id }}" role="tab" aria-controls="v-pills-messages" aria-selected="false">For Car</a>
+                                                                                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings_{{ $spare_part->id }}" role="tab" aria-controls="v-pills-settings" aria-selected="false">Images</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-9">
+                                                                            <div class="tab-content mt-0" id="v-pills-tabContent">
+                                                                                <div class="tab-pane fade show active" id="v-pills-home_{{ $spare_part->id }}" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                                                    <div><b>Status:</b>{{ $spare_part->status }}</div>
+                                                                                    <div><b>Quantity:</b>{{ $spare_part->quantity }}</div>
+                                                                                    <div><b>Price:</b>{{ $spare_part->price }}</div>
+                                                                                    <div><b>Production Date:</b>{{ $spare_part->production_date }}</div>
+                                                                                    <div><b>Expiration Date:</b>{{ $spare_part->expiration_date }}</div>
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="v-pills-profile_{{ $spare_part->id }}" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                                                                    <p>{{ $spare_part->description }}</p>
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="v-pills-messages_{{ $spare_part->id }}" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                                                                    <div><b>This Spare Part Belongs To Brand : </b>{{ $spare_part->brand->name }}</div>
+                                                                                    @php
+                                                                                        $models = $spare_part->models;
+                                                                                    @endphp
+                                                                                    <div><b>Models : </b></div>
+                                                                                    @foreach ($models as $model)
+                                                                                        <div>-{{ $model->code }}</div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                                @php
+                                                                                    $images = json_decode($spare_part->images, true);
+                                                                                @endphp
+                                                                                @if (!empty($images))
+                                                                                    <div class="tab-pane fade" id="v-pills-settings_{{ $spare_part->id }}" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                                                                        <div class="iq-card">
+                                                                                            <div class="iq-card-body">
+                                                                                                <div id="carouselExampleIndicators_{{ $spare_part->id }}" class="carousel slide" data-ride="carousel">
+                                                                                                    <ol class="carousel-indicators">
+                                                                                                        @foreach($images as $key => $image)
+                                                                                                            <li data-target="#carouselExampleIndicators_{{ $spare_part->id }}" data-slide-to="{{ $key }}" @if($key === 0) class="active" @endif></li>
+                                                                                                        @endforeach
+                                                                                                    </ol>
+                                                                                                    <div class="carousel-inner">
+                                                                                                        @foreach($images as $key => $image)
+                                                                                                            <div class="carousel-item @if($key === 0) active @endif">
+                                                                                                                <img src="{{ asset('storage/' . $image) }}" class="d-block w-100" alt="{{ $image }}">
+                                                                                                            </div>
+                                                                                                        @endforeach
+                                                                                                    </div>
+                                                                                                    <a class="carousel-control-prev" href="#carouselExampleIndicators_{{ $spare_part->id }}" role="button" data-slide="prev">
+                                                                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                                        <span class="sr-only">Previous</span>
+                                                                                                    </a>
+                                                                                                    <a class="carousel-control-next" href="#carouselExampleIndicators_{{ $spare_part->id }}" role="button" data-slide="next">
+                                                                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                                        <span class="sr-only">Next</span>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endif
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a class="btn btn-primary" href="{{ route('dashboard.vendor-spare-parts.edit', $spare_part->id) }}"><i class="ri-pencil-line"></i>EDIT</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
 
-                                    <td><b>{{ $spare_part->name }}</b></td>
                                     <td><b>{{ $spare_part->status }}</b></td>
-                                    <td>{{ $spare_part->quantity }}</td>
+                                    <td>{{ (!empty($spare_part->quantity))?$spare_part->quantity.'Item':'0 Item' }}</td>
                                     <td>{{ $spare_part->production_date }}</td>
                                     <td>{{ $spare_part->expiration_date }}</td>
-                                    <td>{{ $spare_part->price }}</td>
+                                    <td>{{ $spare_part->price }}EGP</td>
                                     <td>{{ $spare_part->sold_out }}</td>
                                     <td>
                                         <div class="flex align-items-center list-user-action">
@@ -119,4 +225,23 @@
        </div>
     </div>
  </div>
+ <script>
+    $('#exampleModalCenteredScrollable_{{ $spare_part->id }}').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var modal = $(this);
+        // Make an AJAX request to fetch the content for this spare part
+        $.ajax({
+            url: '/path-to-your-ajax-endpoint',
+            method: 'GET',
+            data: { spare_part_id: {{ $spare_part->id }} },
+            success: function(response) {
+                modal.find('.modal-content').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+</script>
+
 @endsection

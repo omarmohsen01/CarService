@@ -7,6 +7,7 @@ use App\Http\Controllers\Interfaces\Dashboard\VendorSparePartServiceInterface;
 use App\Http\Requests\Dashboard\VendorSparePartRequest;
 use App\Models\Brand;
 use App\Models\ModelCar;
+use App\Models\SpareModel;
 use App\Models\SparePart;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,7 @@ class VendorSparePartController extends Controller
     {
         $spare_parts=$this->sparePartService->sparePartIndex($request);
         $brands=Brand::all();
+        $models=SpareModel::get();
         return view('dashboard.spare_part.spare_part_vendor.index', compact(["spare_parts",'brands']));
     }
 
