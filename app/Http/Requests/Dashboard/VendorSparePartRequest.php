@@ -29,7 +29,7 @@ class VendorSparePartRequest extends FormRequest
             'price'=>'sometimes|required|integer',
             'production_date'=>'date|before_or_equal:now',
             'expiration_date'=>'date|after:now',
-            'description'=>'sometimes|string|required|min:2|max:255',
+            'description'=>'sometimes|string|required|min:2|max:1024',
             'brand_id'=>'sometimes|required|exists:brands,id',
             // 'images'=>'mimes:jpeg,png,gif,webp',
             'videos'=>'mimes:mp4,mov,avi,wmv',
