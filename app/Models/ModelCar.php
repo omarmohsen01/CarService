@@ -21,6 +21,12 @@ class ModelCar extends Model
     {
         return $this->belongsToMany(SparePart::class,'spare_model','model_id','spare_part_id');
     }
+
+    public function car_tuning_services()
+    {
+        return $this->belongsToMany(CarTuningService::class,'tuning_model','model_id','tuning_service_id');
+    }
+    
     public function scopeFilter(Builder $builder, $filter)
     {
         $defaultOptions = [

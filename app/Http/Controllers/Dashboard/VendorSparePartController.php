@@ -69,7 +69,8 @@ class VendorSparePartController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $spare_part = SparePart::find($id);
+        return view('dashboard.spare_part.spare_part_vendor.edit', compact(['spare_part']));
     }
 
     /**

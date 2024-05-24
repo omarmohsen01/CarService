@@ -1,16 +1,19 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AdminController;
+use App\Http\Controllers\Dashboard\AdminSparePartController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\Auth\LogoutController;
 use App\Http\Controllers\Dashboard\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\BrandController;
+use App\Http\Controllers\Dashboard\CarTuningController;
 use App\Http\Controllers\Dashboard\CommentController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ModelController;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\VendorSparePartController;
+use App\Models\CarTuning;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,6 +28,9 @@ Route::group([
     'prefix'=>'admin/'
 ], function () {
     Route::resource('/',DashboardController::class);
+
+    //route for profile
+    // Route::
     //routes for users
     Route::post('users/change-status/{id}',[UserController::class,'change_user_status'])->name('users.changeStatus');
     Route::resource('/users',UserController::class);
@@ -46,6 +52,12 @@ Route::group([
     Route::resource('/comments',CommentController::class);
 
     //route for spare part venor
+    Route::resource('/spare-parts',AdminSparePartController::class);
+
+    //route for spare part venor
     Route::resource('/vendor-spare-parts',VendorSparePartController::class);
+
+    //route for car-tunings
+    Route::resource('/car-tunings',CarTuningController::class);
 }
 );

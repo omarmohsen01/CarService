@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\Brand;
+use App\Models\SpareModel;
+use App\Models\SparePart;
 use Illuminate\Http\Request;
 
 class AdminSparePartController extends Controller
@@ -10,9 +14,15 @@ class AdminSparePartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $spare_parts=SparePart::filter($request->query())->paginate(10);
+        $brands=Brand::all();
+        $models=SpareModel::get();
+        $admins = Admin::join('spare_parts', 'admins.id', '=', 'spare_parts.admin_id')
+                ->distinct()
+                ->get(['admins.*']);
+        return view('dashboard.spare_part.spare_part_admin.index',compact('spare_parts','brands','models','admins'));
     }
 
     /**
@@ -60,6 +70,15 @@ class AdminSparePartController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try{
+            $spare_part=SparePart::find($id);
+            $spare_part->delete();
+            return redirect()->route('dashboard.spare-parts.index')
+            ->with('success','Spare Part Deleted Successfully');
+        }catch(\Exception $e){
+            return redirect()->route('dashboard.spare-parts.index')
+                ->with('fail','Not Deleted,Please Try Again');
+            throw $e;
+        }
     }
 }
