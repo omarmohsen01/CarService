@@ -20,7 +20,7 @@
                    <li class="active"><a href="{{ route('dashboard.index') }}"><i class="las la-laptop-code"></i>Account Dashboard</a></li>
                 </ul>
              </li>
-             @if (auth()->guard('admin')->user()->type===('ADMIN'||'SUPER_ADMIN'))
+             {{-- @if (auth()->guard('admin')->user()->type===('ADMIN'||'SUPER_ADMIN')) --}}
               <li>
                 <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
@@ -28,7 +28,7 @@
                    <li><a href="{{ route('dashboard.users.index') }}"><i class="las la-th-list"></i>User List</a></li>
                 </ul>
              </li>
-             @endif
+             {{-- @endif --}}
              <li>
                 <a href="#car" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-car iq-arrow-left"></i><span>Car</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="car" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
@@ -43,10 +43,18 @@
                    <li><a href="{{ route('dashboard.comments.index') }}"><i class="las la-comments"></i>Comment</a></li>
                 </ul>
              </li>
+             {{-- for vendor --}}
              <li>
                 <a href="#spare" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tools iq-arrow-left"></i><span>Spare Part</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="spare" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                    <li><a href="{{ route('dashboard.vendor-spare-parts.index') }}"><i class="las la-wrench"></i>Spare Part</a></li>
+                </ul>
+             </li>
+             {{-- for admins --}}
+             <li>
+                <a href="#spareadmin" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tools iq-arrow-left"></i><span>Spare Part</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="spareadmin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                   <li><a href="{{ route('dashboard.spare-parts.index') }}"><i class="las la-wrench"></i>Spare Part</a></li>
                 </ul>
              </li>
           </ul>

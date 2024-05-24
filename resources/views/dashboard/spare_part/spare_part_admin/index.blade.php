@@ -20,8 +20,6 @@
                    <x-dashboard.alert />
                    <div class="iq-card-body">
                       <div class="table-responsive">
-                        <a class="btn btn-primary" style="margin-bottom: 15px" href="{{ route('dashboard.vendor-spare-parts.create') }}">Add New Spare-part</a>
-
                         <div class="d-flex w-100">
                             <form class="mr-3 position-relative d-flex flex-grow-1" action="{{ URL::current() }}" method="get">
                                 <div class="form-group mr-4 mb-0 flex-grow-1" style="max-width: fit-content;">
@@ -32,6 +30,14 @@
                                         <option value="">Select Brand</option>
                                         @foreach ($brands as $brand)
                                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group mr-4 mb-0 flex-grow-1">
+                                    <select name="admin_id" id="country" class="form-control" placeholder="Vendor">
+                                        <option value="">Select Vendor</option>
+                                        @foreach ($admins as $admin)
+                                            <option value="{{ $admin->id }}">{{ $admin->first_name }} {{ $admin->last_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -185,8 +191,7 @@
                                     <td>{{ $spare_part->sold_out }}</td>
                                     <td>
                                         <div class="flex align-items-center list-user-action">
-                                            <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="{{ route('dashboard.vendor-spare-parts.edit',$spare_part->id) }}"><i class="ri-pencil-line"></i></a>
-                                            <form method="POST" action="{{ route('dashboard.vendor-spare-parts.destroy',$spare_part->id) }}">
+                                            <form method="POST" action="{{ route('dashboard.spare-parts.destroy',$spare_part->id) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-link" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="ri-delete-bin-line"></i></button>

@@ -31,6 +31,7 @@ class SparePart extends Model
             'name' => null,
             'brand_id' => null,
             'status' => null,
+            'admin_id'=>null,
         ];
 
         $options = array_merge($defaultOptions, $filter);
@@ -43,6 +44,9 @@ class SparePart extends Model
         });
         $builder->when($options['status'], function ($query, $status) {
             return $query->where('status', $status);
+        });
+        $builder->when($options['admin_id'], function ($query, $admin_id) {
+            return $query->where('admin_id', $admin_id);
         });
 
         return $builder;
