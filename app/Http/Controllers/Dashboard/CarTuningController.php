@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Interfaces\Dashboard\CarTuningSericeInterface;
+use App\Http\Controllers\Interfaces\Dashboard\CarTuningServiceInterface;
 use App\Models\CarTuning;
 use Illuminate\Http\Request;
 
 class CarTuningController extends Controller
 {
     protected $carTuningService;
-    public function __construct(CarTuningSericeInterface $carTuningService)
+    public function __construct(CarTuningServiceInterface $carTuningService)
     {
         $this->carTuningService = $carTuningService;
     }
@@ -36,12 +36,16 @@ class CarTuningController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>'required|string|min:3|max:255',
+            'description'=>'nullable'
+        ]);
         try{
             $this->carTuningService->carTuningStore($request);
             return redirect()->route('dashboard.car-tunings.index')
                 ->with('success','Car Tuning Created Successfully');
         }catch(\Exception $e){
-            return redirect()->route('dashboard.Car Tunings.index')
+            return redirect()->route('dashboard.Car-tunings.index')
                 ->with('fail','Something Went Wrong,Please Try Again');
             throw $e;
         }

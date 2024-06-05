@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Services\Dashboard;
 
 use App\Http\Controllers\Interfaces\Dashboard\BrandSericeInterface;
-use App\Http\Controllers\Interfaces\Dashboard\CarTuningSericeInterface;
+use App\Http\Controllers\Interfaces\Dashboard\CarTuningServiceInterface;
 use App\Models\Brand;
 use App\Models\CarTuning;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class BrandService implements CarTuningSericeInterface {
+class carTuningService implements CarTuningServiceInterface {
 
     public function carTuningIndex()
     {

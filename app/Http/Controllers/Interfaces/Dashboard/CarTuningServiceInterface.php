@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Interfaces\Dashboard;
 
-interface CarTuningSericeInterface
+interface CarTuningServiceInterface
 {
     public function carTuningIndex();
     public function carTuningStore($data);

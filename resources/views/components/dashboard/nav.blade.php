@@ -57,6 +57,18 @@
                    <li><a href="{{ route('dashboard.spare-parts.index') }}"><i class="las la-wrench"></i>Spare Part</a></li>
                 </ul>
              </li>
+             <li>
+                <a href="#carTuningAdmin" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tachometer-alt iq-arrow-left"></i><span>Car Tuning</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="carTuningAdmin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                   <li><a href="{{ route('dashboard.car-tunings.index') }}"><i class="las la-tachometer-alt"></i>Car Tuning</a></li>
+                </ul>
+             </li>
+             <li>
+                <a href="#carTuningVendor" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tachometer-alt iq-arrow-left"></i><span>Car Tuning</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                <ul id="carTuningVendor" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                   <li><a href="{{ route('dashboard.car-tuning-services.index') }}"><i class="las la-tachometer-alt"></i>Car Tuning Service</a></li>
+                </ul>
+             </li>
           </ul>
        </nav>
        <div class="p-3"></div>

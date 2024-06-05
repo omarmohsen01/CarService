@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\Auth\LogoutController;
 use App\Http\Controllers\Dashboard\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\BrandController;
 use App\Http\Controllers\Dashboard\CarTuningController;
+use App\Http\Controllers\Dashboard\CarTuningServiceController;
 use App\Http\Controllers\Dashboard\CommentController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ModelController;
@@ -59,5 +60,8 @@ Route::group([
 
     //route for car-tunings
     Route::resource('/car-tunings',CarTuningController::class);
+
+    //route for car-tuning vendor
+    Route::resource('/car-tuning-services',CarTuningServiceController::class);
 }
 );
