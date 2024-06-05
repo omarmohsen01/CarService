@@ -48,12 +48,7 @@ class VendorSparePartService implements VendorSparePartServiceInterface {
             'videos'=> json_encode($videoPaths),
         ]);
         if(isset($data->model_id)){
-            foreach ($data->model_id as $model_id) {
-                SpareModel::create([
-                    'spare_part_id'=>$spare_part->id,
-                    'model_id'=> $model_id,
-                ]);
-            }
+            $spare_part->models()->attach($data['model_id']);
         }
         return $spare_part;
     }

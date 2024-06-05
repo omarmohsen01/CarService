@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->double('price');
-            $table->string('image', 2048)->nullable();
+            $table->json('images')->nullable();
             $table->enum('installation', ['YES','NO'])->default('NO');
             $table->foreignId('car_tuning_id')->constrained('car_tuning')->cascadeOnDelete();
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
+            $table->foreignId('admin_id')->constrained('admins')->cascadeOnDelete();
             $table->timestamps();
         });
     }

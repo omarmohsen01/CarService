@@ -9,6 +9,6 @@ class CarTuning extends Model
 {
     use HasFactory;
     protected $fillable = ['name','description'];
+    protected $table='car_tuning';
 
-    
 }
