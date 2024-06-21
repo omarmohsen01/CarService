@@ -15,9 +15,7 @@ class VendorSparePartService implements VendorSparePartServiceInterface {
 
     public function sparePartStore($data)
     {
-        // dd($data);
         $images = $data->file('images');
-        $videos = $data->file('videos');
         $imagePaths = [];
         $videoPaths = [];
         if(isset($images)){
@@ -27,13 +25,6 @@ class VendorSparePartService implements VendorSparePartServiceInterface {
                 $imagePaths[] = $path;
             }
         }
-        // if(isset($videos)){
-        //     foreach ($videos as $video) {
-        //         $newName = rand() . '.' . $video->getClientOriginalExtension();
-        //         $path = $video->storeAs('vendor-spare-part-videos', $newName, 'public'); // Store the video using Storage facade
-        //         $videoPaths[] = $path;
-        //     }
-        // }
         $spare_part=SparePart::create([
             'name' => $data->name,
             'quantity'=> $data->quantity,

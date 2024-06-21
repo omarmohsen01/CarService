@@ -11,6 +11,8 @@ use App\Http\Controllers\Dashboard\CarTuningServiceController;
 use App\Http\Controllers\Dashboard\CommentController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ModelController;
+use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\OrderVendorController;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\VendorSparePartController;
@@ -63,5 +65,11 @@ Route::group([
 
     //route for car-tuning vendor
     Route::resource('/car-tuning-services',CarTuningServiceController::class);
+
+    Route::resource('/orders',OrderController::class);
+    Route::post('orders/change-status/{id}',[AdminController::class,'change_order_status'])->name('orders.changeStatus');
+
+    Route::resource('/orders-vendor',OrderVendorController::class);
+
 }
 );

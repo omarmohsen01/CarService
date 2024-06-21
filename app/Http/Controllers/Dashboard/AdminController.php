@@ -7,6 +7,7 @@ use App\Http\Controllers\Interfaces\Dashboard\AdminSericeInterface;
 use App\Http\Requests\Dashboard\AdminRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AdminController extends Controller
 {
@@ -20,6 +21,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
+        // Gate::authorize('accessAdminController',Admin::class);
         $admins = $this->adminService->adminIndex($request);
         return view('dashboard.admin.index', compact("admins"));
     }
@@ -29,6 +31,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+        // Gate::authorize('createAdmin',Admin::class);
         return view('dashboard.admin.create');
     }
 
@@ -37,6 +40,7 @@ class AdminController extends Controller
      */
     public function store(AdminRequest $request)
     {
+        // Gate::authorize('createAdmin',Admin::class);
         $created=$this->adminService->adminStore($request);
         if($created){
             return redirect()->route('dashboard.admins.index')->with('success','Admin Or Vendor Created Successfully');
@@ -67,6 +71,8 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
+        // Gate::authorize('editAdmin',Admin::class);
+
         $admin=Admin::findOrFail($id);
         return view('dashboard.admin.edit',compact('admin'));
     }
@@ -76,6 +82,8 @@ class AdminController extends Controller
      */
     public function update(AdminRequest $request, string $id)
     {
+        // Gate::authorize('editAdmin',Admin::class);
+
         try{
             $this->adminService->adminUpdate($request, $id);
             return redirect()->route('dashboard.admins.index')
@@ -92,6 +100,8 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
+        // Gate::authorize('deleteAdmin',Admin::class);
+
         try{
             $this->adminService->adminDestroy($id);
             return redirect()->route('dashboard.admins.index')
@@ -105,6 +115,8 @@ class AdminController extends Controller
 
     public function change_admin_status(string $id)
     {
+        // Gate::authorize('activeAdmin',Admin::class);
+
         try{
             $status_changed=$this->adminService->changeAdminStatus($id);
             if($status_changed=='INACTIVATED'){

@@ -23,7 +23,7 @@ class RegisterController extends Controller
             'password'=> ['required','string'],
             'phone'=> ['required','integer','unique:admins'],
         ]);
-        Admin::create([
+        $admin=Admin::create([
             'first_name'=> $request->first_name,
             'last_name'=> $request->last_name,
             'email'=> $request->email,
@@ -31,7 +31,6 @@ class RegisterController extends Controller
             'password'=> Hash::make($request->password),
             'type'=> 'VENDOR'
         ]);
-
         return redirect()->route('dashboard.login.index')->with('success','Welcome, You Have Become Vendor Now');
     }
 }

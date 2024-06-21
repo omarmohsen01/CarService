@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Interfaces\Dashboard\CarTuningSerSericeInterface;
 use App\Http\Requests\Dashboard\CarTuningServiceRequest;
+use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\CarTuning;
 use App\Models\ModelCar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CarTuningServiceController extends Controller
 {
@@ -22,6 +24,7 @@ class CarTuningServiceController extends Controller
      */
     public function index(Request $request)
     {
+        Gate::authorize('accessCarTuningController',Admin::class);
         $car_tuning_services=$this->carTuningSerService->carTuningSerIndex($request);
         $brands=Brand::all();
         return view('dashboard.carTuningService.index', compact(["car_tuning_services",'brands']));
@@ -32,6 +35,7 @@ class CarTuningServiceController extends Controller
      */
     public function create(Request $request)
     {
+        Gate::authorize('createCarTuning',Admin::class);
         $selectedBrandId = $request->input('brand_id');
         $models = ModelCar::where('brand_id', $selectedBrandId)->get();
         $brands=Brand::orderBy('name','asc')->get();
@@ -44,6 +48,8 @@ class CarTuningServiceController extends Controller
      */
     public function store(CarTuningServiceRequest $request)
     {
+        Gate::authorize('createCarTuning',Admin::class);
+
         // dd($request);
         try{
             $this->carTuningSerService->carTuningSerStore($request);
@@ -85,6 +91,8 @@ class CarTuningServiceController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('deleteCarTuning',Admin::class);
+
         try{
             $this->carTuningSerService->carTuningSerDestroy($id);
             return redirect()->route('dashboard.car-tuning-services.index')

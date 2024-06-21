@@ -189,7 +189,26 @@
         </a>
       </div>
     <!-- Hero Section End -->
-
+    @if (session()->has('success'))
+    <div class="alert text-white bg-success" role="alert">
+        <div class="iq-alert-icon">
+        </div>
+        <div class="iq-alert-text">{{ session('success') }}</div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="ri-close-line"></i>
+        </button>
+    </div>
+    @elseif (session()->has('fail'))
+    <div class="alert text-white bg-danger" role="alert">
+        <div class="iq-alert-icon">
+        <i class="ri-information-line"></i>
+        </div>
+        <div class="iq-alert-text">{{ session('fail') }}</div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="ri-close-line"></i>
+        </button>
+    </div>
+    @endif
     <!-- Services Section Begin -->
     <section class="services spad">
         <div class="container">
@@ -340,6 +359,8 @@
                 </div>
             </div>
             <div class="row car-filter">
+
+
                 @foreach ($best_sale_spare_parts as $spare_part)
                     @php
                         $isLatest = $latest_spare_parts->contains('id', $spare_part->id);
@@ -366,8 +387,8 @@
                                     </ul>
                                 </div>
                                 <div class="car__item__price">
-                                    <span class="car-option sale">For Sale</span>
-                                    <h6>${{ number_format($spare_part->price,2) }}</h6>
+                                    <span><a href="" class="primary-btn">Add To Cart</a>
+                                    <h6>${{ number_format($spare_part->price,2) }}</h6></span>
                                 </div>
                             </div>
                         </div>
