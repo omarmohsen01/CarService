@@ -20,47 +20,55 @@
                    <li class="active"><a href="{{ route('dashboard.index') }}"><i class="las la-laptop-code"></i>Account Dashboard</a></li>
                 </ul>
              </li>
-             {{-- @if (auth()->guard('admin')->user()->type===('ADMIN'||'SUPER_ADMIN')) --}}
-              <li>
-                <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
-                   <li><a href="{{ route('dashboard.admins.index') }}"><i class="las la-th-list"></i>Admin & Vendor List</a></li>
-                   <li><a href="{{ route('dashboard.users.index') }}"><i class="las la-th-list"></i>User List</a></li>
-                </ul>
-             </li>
-             {{-- @endif --}}
-             <li>
-                <a href="#car" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-car iq-arrow-left"></i><span>Car</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                <ul id="car" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                   <li><a href="{{ route('dashboard.brands.index') }}"><i class="las la-certificate"></i>Brand</a></li>
-                   <li><a href="{{ route('dashboard.models.index') }}"><i class="las la-flag"></i>Model</a></li>
-                </ul>
-             </li>
-             <li>
-                <a href="#social" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-hashtag iq-arrow-left"></i><span>Social Media</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                <ul id="social" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                   <li><a href="{{ route('dashboard.posts.index') }}"><i class="las la-share"></i>Post</a></li>
-                   <li><a href="{{ route('dashboard.comments.index') }}"><i class="las la-comments"></i>Comment</a></li>
-                </ul>
-             </li>
+             @if (auth()->guard('admin')->user()->type==('ADMIN'||'SUPER_ADMIN'))
+                <li>
+                    <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
+                    <li><a href="{{ route('dashboard.admins.index') }}"><i class="las la-th-list"></i>Admin & Vendor List</a></li>
+                    <li><a href="{{ route('dashboard.users.index') }}"><i class="las la-th-list"></i>User List</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#car" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-car iq-arrow-left"></i><span>Car</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="car" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    <li><a href="{{ route('dashboard.brands.index') }}"><i class="las la-certificate"></i>Brand</a></li>
+                    <li><a href="{{ route('dashboard.models.index') }}"><i class="las la-flag"></i>Model</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#social" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-hashtag iq-arrow-left"></i><span>Social Media</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="social" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    <li><a href="{{ route('dashboard.posts.index') }}"><i class="las la-share"></i>Post</a></li>
+                    {{-- <li><a href="{{ route('dashboard.comments.index') }}"><i class="las la-comments"></i>Comment</a></li> --}}
+                    </ul>
+                </li>
+                <li>
+                    <a href="#spareadmin" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tools iq-arrow-left"></i><span>Spare Part</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="spareadmin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    <li><a href="{{ route('dashboard.spare-parts.index') }}"><i class="las la-wrench"></i>Spare Part</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#carTuningAdmin" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tachometer-alt iq-arrow-left"></i><span>Car Tuning</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="carTuningAdmin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    <li><a href="{{ route('dashboard.car-tunings.index') }}"><i class="las la-tachometer-alt"></i>Car Tuning</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#orders" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tachometer-alt iq-arrow-left"></i><span>Orders</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                    <ul id="orders" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                    <li><a href="{{ route('dashboard.orders.index') }}"><i class="las la-tachometer-alt"></i>Orders</a></li>
+                    </ul>
+                </li>
+             @endif
+             @if (auth()->guard('admin')->user()->type===('VENDOR'))
+
              {{-- for vendor --}}
              <li>
                 <a href="#spare" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tools iq-arrow-left"></i><span>Spare Part</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                 <ul id="spare" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                    <li><a href="{{ route('dashboard.vendor-spare-parts.index') }}"><i class="las la-wrench"></i>Spare Part</a></li>
-                </ul>
-             </li>
-             {{-- for admins --}}
-             <li>
-                <a href="#spareadmin" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tools iq-arrow-left"></i><span>Spare Part</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                <ul id="spareadmin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                   <li><a href="{{ route('dashboard.spare-parts.index') }}"><i class="las la-wrench"></i>Spare Part</a></li>
-                </ul>
-             </li>
-             <li>
-                <a href="#carTuningAdmin" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-tachometer-alt iq-arrow-left"></i><span>Car Tuning</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                <ul id="carTuningAdmin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                   <li><a href="{{ route('dashboard.car-tunings.index') }}"><i class="las la-tachometer-alt"></i>Car Tuning</a></li>
                 </ul>
              </li>
              <li>
@@ -69,6 +77,10 @@
                    <li><a href="{{ route('dashboard.car-tuning-services.index') }}"><i class="las la-tachometer-alt"></i>Car Tuning Service</a></li>
                 </ul>
              </li>
+             @endif
+             {{-- for admins --}}
+
+
           </ul>
        </nav>
        <div class="p-3"></div>

@@ -11,7 +11,7 @@
         <a href="#" class="primary-btn">Add Car</a>
     </div>
     <div class="offcanvas__logo">
-        <a href="./index.html"><img src="{{ asset('front/img/logo.png') }}" alt=""></a>
+        <a href="{{ route('home') }}"><img src="{{ asset('front/img/l.png') }}" alt=""></a>
     </div>
     <div id="mobile-menu-wrap"></div>
     <ul class="offcanvas__widget__add">
@@ -73,24 +73,25 @@ style="
         <div class="row align-items-center">
             <div class="col-lg-2">
                 <div class="header__logo">
-                    <a href="./index.html"><img src="{{ asset('front/img/logo.png')}}" alt=""></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('front/img/l.png')}}" alt=""></a>
                 </div>
             </div>
             <div class="col-auto">
                 <div class="header__nav">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./car.html">Cars</a></li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="{{ request()->routeIs('home') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="{{ request()->routeIs('sapre-parts.index') ? 'active' : '' }}"><a href="{{ route('sapre-parts.index') }}">Spare Parts</a></li>
+                            <li class="{{ request()->routeIs('posts.index') ? 'active' : '' }}"><a href="{{ route('posts.index') }}">Social Media</a></li>
+                            {{-- <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./about.html">About Us</a></li>
                                     <li><a href="./car-details.html">Car Details</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="./about.html">About</a></li>
+                            </li> --}}
+                            <li class="{{ request()->routeIs('car_tuning.index') ? 'active' : '' }}"><a href="{{ route('car_tuning.index') }}">Car Tuning Service</a></li>
+                            <li class="{{ request()->routeIs('about.index') ? 'active' : '' }}"><a href="{{ route('about.index') }}">About</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
@@ -102,10 +103,37 @@ style="
             >
                 <div class="header__nav__widget d-flex">
                     <div class="header__nav__widget__btn d-flex align-items-center">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
+                        <a href="{{ route('cart.index') }}"><i class="fa fa-cart-plus"></i></a>
+                        {{-- <a href="#" class="search-switch"><i class="fa fa-search"></i></a> --}}
                     </div>
-                    <a href="#" class="primary-btn">Find Nearest Mechanic</a>
+                    {{-- <a href="#" style="border-radius: 16px;" class="primary-btn">Find Nearest Mechanic</a> --}}
+                    {{-- @if (request()->routeIs('cart')) --}}
+                        @auth
+                            <nav class="header__menu" style="margin-left: 22px">
+                                <ul>
+                                    <li><a href="#">{{ auth()->user()->first_name }}</a>
+                                        <ul class="dropdown">
+                                            <li><a href="./about.html">Profile</a></li>
+                                            <li>
+                                                <form action="{{ route('logout') }}" method="POST">
+                                                    @csrf
+                                                    <button
+                                                    style="background: none;
+                                                    border: none;
+                                                    text-decoration: none;
+                                                    cursor: pointer;
+                                                    color:white;
+                                                    font-size: inherit;
+                                                    padding: 0;
+                                                    margin-left:17px"
+                                                    type="submit" class="link-button">LogOut</button>
+                                                </form>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        @endauth
+                    {{-- @endif --}}
                 </div>
             </div>
         </div>

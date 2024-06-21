@@ -25,8 +25,7 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
-        'image',
-        'status'
+        'brand_id'
     ];
 
     /**
@@ -47,6 +46,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 
     public function scopeFilter(Builder $builder, $filter)
     {

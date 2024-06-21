@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Interfaces\Dashboard\BrandSericeInterface;
 use App\Http\Requests\Dashboard\BrandRequest;
+use App\Models\Admin;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Monarobase\CountryList\CountryListFacade;
 
 class BrandController extends Controller
@@ -21,6 +23,7 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
+        // Gate::authorize('accessBrandController',Admin::class);
         $countries = CountryListFacade::getList();
         $brands = $this->brandService->brandIndex($request);
         return view('dashboard.brand.index', compact('brands','countries'));
@@ -31,6 +34,7 @@ class BrandController extends Controller
      */
     public function create()
     {
+        // Gate::authorize('createBrand',Admin::class);
         $countries = CountryListFacade::getList();
         return view('dashboard.brand.create',compact('countries'));
     }
@@ -40,6 +44,7 @@ class BrandController extends Controller
      */
     public function store(BrandRequest $request)
     {
+        // Gate::authorize('createBrand',Admin::class);
         try{
             $this->brandService->brandStore($request);
             return redirect()->route('dashboard.brands.index')
@@ -64,6 +69,8 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
+        // Gate::authorize('editBrand',Admin::class);
+
         $countries = CountryListFacade::getList();
         $brand=Brand::findOrFail($id);
         return view('dashboard.brand.edit',compact(['brand','countries']));
@@ -74,6 +81,8 @@ class BrandController extends Controller
      */
     public function update(BrandRequest $request, string $id)
     {
+        // Gate::authorize('editBrand',Admin::class);
+
         try{
             $this->brandService->brandUpdate($request, $id);
             return redirect()->route('dashboard.brands.index')
@@ -90,6 +99,8 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
+        // Gate::authorize('deleteBrand',Admin::class);
+
         try{
             $this->brandService->brandDestroy($id);
             return redirect()->route('dashboard.brands.index')

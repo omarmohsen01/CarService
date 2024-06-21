@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\SpareModel;
 use App\Models\SparePart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AdminSparePartController extends Controller
 {
@@ -16,6 +17,7 @@ class AdminSparePartController extends Controller
      */
     public function index(Request $request)
     {
+        // Gate::authorize('accessAdminSparePartController',Admin::class);
         $spare_parts=SparePart::filter($request->query())->paginate(10);
         $brands=Brand::all();
         $models=SpareModel::get();
@@ -70,6 +72,8 @@ class AdminSparePartController extends Controller
      */
     public function destroy(string $id)
     {
+        // Gate::authorize('deleteAdminSparePart',Admin::class);
+
         try{
             $spare_part=SparePart::find($id);
             $spare_part->delete();

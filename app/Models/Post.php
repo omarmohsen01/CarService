@@ -20,6 +20,10 @@ class Post extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     public function scopeFilter(Builder $builder, $filter)
     {
         $defaultOptions = [

@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Interfaces\Dashboard\VendorSparePartServiceInterface;
 use App\Http\Requests\Dashboard\VendorSparePartRequest;
+use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\ModelCar;
 use App\Models\SpareModel;
 use App\Models\SparePart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class VendorSparePartController extends Controller
 {
@@ -23,6 +25,7 @@ class VendorSparePartController extends Controller
      */
     public function index(Request $request)
     {
+        Gate::authorize('accessSparePartController',Admin::class);
         $spare_parts=$this->sparePartService->sparePartIndex($request);
         $brands=Brand::all();
         $models=SpareModel::get();
@@ -34,6 +37,7 @@ class VendorSparePartController extends Controller
      */
     public function create(Request $request)
     {
+        Gate::authorize('createSparePart',Admin::class);
         $selectedBrandId = $request->input('brand_id');
         $models = ModelCar::where('brand_id', $selectedBrandId)->get();
         $brands=Brand::orderBy('name','asc')->get();
@@ -45,6 +49,8 @@ class VendorSparePartController extends Controller
      */
     public function store(VendorSparePartRequest $request)
     {
+        Gate::authorize('createSparePart',Admin::class);
+
         try{
             // dd($request);
             $this->sparePartService->sparePartStore($request);
@@ -69,6 +75,8 @@ class VendorSparePartController extends Controller
      */
     public function edit(string $id)
     {
+        Gate::authorize('editSparePart',Admin::class);
+
         $spare_part = SparePart::find($id);
         return view('dashboard.spare_part.spare_part_vendor.edit', compact(['spare_part']));
     }
@@ -86,6 +94,8 @@ class VendorSparePartController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('deleteSparePart',Admin::class);
+
         try{
             $this->sparePartService->sparePartDestroy($id);
             return redirect()->route('dashboard.vendor-spare-parts.index')
